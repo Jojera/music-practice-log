@@ -1,37 +1,41 @@
 const mongodb = require("../data/database");
 const ObjectId = require("mongodb").ObjectId;
 
-const getAllMusicLogs = (req, res) => {
-  // #swagger.tags = ['musicLogs']  
-  mongodb
-    .getDb()
-    .db()
-    .collection('musicLogs')
-    .find()
-    .toArray((err, lists) => {
-      if (err) {
-        res.status(400).json({ message: err });
-      }
-      res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(lists);
-    });
+const getAllMusicLogs = async (req, res) => {
+  // #swagger.tags = ['musicLogs']
+  try {
+    const result = await mongodb.getDb().db().collection('musicLogs').find();
+    const musicLogs = await result.toArray();
+
+    if (!musicLogs || musicLogs.length === 0) {
+      return res.status(404).json({ message: 'No music logs found or collection may not exist' });
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(musicLogs);
+
+  } catch (err) {
+    console.error('Error fetching music logs:', err);
+    res.status(500).json({ message: 'Failed to retrieve music logs' });
+  }
 };
 
-const getMusicLogById = (req, res) => {
+const getMusicLogById = async (req, res) => {
   // #swagger.tags = ['musicLogs']
   const musicLogId = new ObjectId(req.params.id);
-  mongodb
-    .getDb()
-    .db()
-    .collection('musicLogs')
-    .find({ _id: musicLogId })
-    .toArray((err, result) => {
-      if (err) {
-        res.status(400).json({ message: err });
-      }
-      res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(result[0]);
-    });
+  try {
+    const result = await mongodb.getDb().db().collection('musicLogs').find({_id: musicLogId});
+    const musicLogs = await result.toArray();
+
+    if (!musicLogs || musicLogs.length === 0) {
+      return res.status(404).json({ message: 'No music logs found or collection may not exist' });
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(musicLogs[0]);
+
+  } catch (err) {
+    console.error('Error fetching music logs:', err);
+    res.status(500).json({ message: 'Failed to retrieve music logs' });
+  }
 };
 
 const createMusicLog = async (req, res) => {
