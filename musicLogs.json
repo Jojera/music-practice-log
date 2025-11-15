@@ -1,0 +1,44 @@
+[
+  {
+    "instrument": "Drums",
+    "duration": 45,
+    "focusArea": "Rudiments and timing",
+    "date": "2025-11-01"
+  },
+  {
+    "instrument": "Guitar",
+    "duration": 30,
+    "focusArea": "Chord transitions",
+    "date": "2025-11-03"
+  },
+  {
+    "instrument": "Piano",
+    "duration": 60,
+    "focusArea": "Sight reading",
+    "date": "2025-11-05"
+  },
+  {
+    "instrument": "Drums",
+    "duration": 50,
+    "focusArea": "Groove and fills",
+    "date": "2025-11-07"
+  },
+  {
+    "instrument": "Violin",
+    "duration": 40,
+    "focusArea": "Bow control and intonation",
+    "date": "2025-11-09"
+  },
+  {
+    "instrument": "Drums",
+    "duration": 35,
+    "focusArea": "Polyrhythms",
+    "date": "2025-11-11"
+  },
+  {
+    "instrument": "Keyboard",
+    "duration": 25,
+    "focusArea": "Scales and finger strength",
+    "date": "2025-11-13"
+  }
+]
