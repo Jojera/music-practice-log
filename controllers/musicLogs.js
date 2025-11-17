@@ -21,6 +21,9 @@ const getAllMusicLogs = async (req, res) => {
 
 const getMusicLogById = async (req, res) => {
   // #swagger.tags = ['musicLogs']
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid contact id to find a contact.');
+  }
   const musicLogId = new ObjectId(req.params.id);
   try {
     const result = await mongodb.getDb().db().collection('musicLogs').find({_id: musicLogId});
@@ -56,6 +59,9 @@ const createMusicLog = async (req, res) => {
 
 const updateMusicLog = async (req, res) => {
   // #swagger.tags = ['musicLogs']
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid contact id to update a contact.');
+  }
   const musicLogId = new ObjectId(req.params.id);
   const musicLog = {
       instrument: req.body.instrument,
@@ -73,6 +79,9 @@ const updateMusicLog = async (req, res) => {
 
 const deleteMusicLog = async (req, res) => {
   // #swagger.tags = ['musicLogs']
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid contact id to delete a contact.');
+  }
   const musicLogId = new ObjectId(req.params.id);
   const response = await mongodb.getDb().db().collection('musicLogs').deleteOne({_id: musicLogId});
   if (response.deletedCount > 0) {

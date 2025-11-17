@@ -30,7 +30,7 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "",
+        "description": "Retrieve all music practice logs",
         "produces": [
           "application/json"
         ],
@@ -44,33 +44,22 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "",
+        "description": "Create a new music practice log",
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "instrument": {
-                  "example": "any"
-                },
-                "duration": {
-                  "example": "any"
-                },
-                "focusArea": {
-                  "example": "any"
-                },
-                "date": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/MusicLog"
             }
           }
         ],
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "400": {
+            "description": "Validation error (e.g., missing or invalid fields)"
           },
           "500": {
             "description": "Internal Server Error"
@@ -83,7 +72,7 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "",
+        "description": "Get a music practice log by ID",
         "produces": [
           "application/json"
         ],
@@ -98,6 +87,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Music log not found"
           }
         }
       },
@@ -105,7 +97,7 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "",
+        "description": "Update a music practice log by ID",
         "parameters": [
           {
             "name": "id",
@@ -117,27 +109,16 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "instrument": {
-                  "example": "any"
-                },
-                "duration": {
-                  "example": "any"
-                },
-                "focusArea": {
-                  "example": "any"
-                },
-                "date": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/MusicLog"
             }
           }
         ],
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "400": {
+            "description": "Validation error (e.g., missing or invalid fields)"
           },
           "500": {
             "description": "Internal Server Error"
@@ -148,7 +129,7 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "",
+        "description": "Delete a music practice log by ID",
         "parameters": [
           {
             "name": "id",
@@ -161,11 +142,39 @@
           "204": {
             "description": "No Content"
           },
+          "404": {
+            "description": "Music log not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       }
     }
+  },
+    "definitions": {
+    "MusicLog": {
+      "type": "object",
+      "required": ["instrument", "duration", "focusArea"],
+      "properties": {
+        "instrument": {
+          "type": "string",
+          "example": "Piano"
+        },
+        "duration": {
+          "type": "integer",
+          "example": 60
+        },
+        "focusArea": {
+          "type": "string",
+          "example": "Scales"
+        },
+        "date": {
+          "type": "string",
+          "example": "any"
+        }
+      }
+    }
   }
 }
+
