@@ -5,7 +5,7 @@
     "description": "A simple API to manage practice sessions for musicians.",
     "version": "1.0.0"
   },
-  "host": "https://music-practice-log.onrender.com",
+  "host": "music-practice-log.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
