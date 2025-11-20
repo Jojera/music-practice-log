@@ -22,7 +22,7 @@ const getAllMusicLogs = async (req, res) => {
 const getMusicLogById = async (req, res) => {
   // #swagger.tags = ['musicLogs']
   if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Must use a valid contact id to find a contact.');
+    res.status(400).json('Must use a valid musicLog id to find a music log.');
   }
   const musicLogId = new ObjectId(req.params.id);
   try {
@@ -60,7 +60,7 @@ const createMusicLog = async (req, res) => {
 const updateMusicLog = async (req, res) => {
   // #swagger.tags = ['musicLogs']
   if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Must use a valid contact id to update a contact.');
+    res.status(400).json('Must use a valid musicLog id to update a music log.');
   }
   const musicLogId = new ObjectId(req.params.id);
   const musicLog = {
@@ -80,7 +80,7 @@ const updateMusicLog = async (req, res) => {
 const deleteMusicLog = async (req, res) => {
   // #swagger.tags = ['musicLogs']
   if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Must use a valid contact id to delete a contact.');
+    res.status(400).json('Must use a valid musicLog id to delete a music log.');
   }
   const musicLogId = new ObjectId(req.params.id);
   const response = await mongodb.getDb().db().collection('musicLogs').deleteOne({_id: musicLogId});

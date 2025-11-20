@@ -29,13 +29,19 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "Retrieve all music practice logs",
+        "description": "",
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -43,13 +49,27 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "Create a new music practice log",
+        "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/MusicLog"
+              "type": "object",
+              "properties": {
+                "instrument": {
+                  "example": "Drums"
+                },
+                "duration": {
+                  "example": 24
+                },
+                "focusArea": {
+                  "example": "Rudiments"
+                },
+                "date": {
+                  "example": "any"
+                }
+              }
             }
           }
         ],
@@ -57,8 +77,8 @@
           "204": {
             "description": "No Content"
           },
-          "400": {
-            "description": "Validation error (e.g., missing or invalid fields)"
+          "412": {
+            "description": "Precondition Failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -71,7 +91,7 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "Get a music practice log by ID",
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -87,8 +107,14 @@
           "200": {
             "description": "OK"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "404": {
-            "description": "Music log not found"
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -96,7 +122,7 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "Update a music practice log by ID",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -108,7 +134,21 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/MusicLog"
+              "type": "object",
+              "properties": {
+                "instrument": {
+                  "example": "Drums"
+                },
+                "duration": {
+                  "example": 24
+                },
+                "focusArea": {
+                  "example": "Rudiments"
+                },
+                "date": {
+                  "example": "any"
+                }
+              }
             }
           }
         ],
@@ -117,7 +157,10 @@
             "description": "No Content"
           },
           "400": {
-            "description": "Validation error (e.g., missing or invalid fields)"
+            "description": "Bad Request"
+          },
+          "412": {
+            "description": "Precondition Failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -128,7 +171,7 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "Delete a music practice log by ID",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -141,8 +184,183 @@
           "204": {
             "description": "No Content"
           },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/musicians/": {
+      "get": {
+        "tags": [
+          "musicians"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
           "404": {
-            "description": "Music log not found"
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "musicians"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "Andy Harrisom"
+                },
+                "email": {
+                  "example": "andy@gmail.com"
+                },
+                "age": {
+                  "example": 33
+                },
+                "instrument": {
+                  "example": "Drums"
+                },
+                "experienceLevel": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/musicians/{id}": {
+      "get": {
+        "tags": [
+          "musicians"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "musicians"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "Andy Harrison"
+                },
+                "email": {
+                  "example": "andy@gmail.com"
+                },
+                "age": {
+                  "example": 33
+                },
+                "instrument": {
+                  "example": "Drums"
+                },
+                "experienceLevel": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "musicians"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -150,30 +368,5 @@
         }
       }
     }
-  },
-    "definitions": {
-    "MusicLog": {
-      "type": "object",
-      "required": ["instrument", "duration", "focusArea"],
-      "properties": {
-        "instrument": {
-          "type": "string",
-          "example": "Piano"
-        },
-        "duration": {
-          "type": "integer",
-          "example": 60
-        },
-        "focusArea": {
-          "type": "string",
-          "example": "Scales"
-        },
-        "date": {
-          "type": "string",
-          "example": "any"
-        }
-      }
-    }
   }
 }
-

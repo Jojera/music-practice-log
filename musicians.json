@@ -1,0 +1,51 @@
+[
+    {
+      "name": "Alice Nanyonga",
+      "email": "alicenanyonga@gmail.com",
+      "age": 24,
+      "instrument": "Piano",
+      "experienceLevel": "Intermediate"
+    },
+    {
+      "name": "Brian Okello",
+      "email": "brianokello@gmail.com",
+      "age": 29,
+      "instrument": "Guitar",
+      "experienceLevel": "Advanced"
+    },
+    {
+      "name": "Cynthia Mbabazi",
+      "email": "cynthiambabazi@gmail.com",
+      "age": 21,
+      "instrument": "Violin",
+      "experienceLevel": "Beginner"
+    },
+    {
+      "name": "David Musoke",
+      "email": "davidmusoke@gmail.com",
+      "age": 32,
+      "instrument": "Drums",
+      "experienceLevel": "Advanced"
+    },
+    {
+      "name": "Esther Kintu",
+      "email": "estherkintu@gmail.com",
+      "age": 27,
+      "instrument": "Flute",
+      "experienceLevel": "Intermediate"
+    },
+    {
+      "name": "Frank Tumusiime",
+      "email": "franktumusiime@gmail.com",
+      "age": 35,
+      "instrument": "Saxophone",
+      "experienceLevel": "Advanced"
+    },
+    {
+      "name": "Grace Namaganda",
+      "email": "gracenamaganda@gmail.com",
+      "age": 22,
+      "instrument": "Voice",
+      "experienceLevel": "Beginner"
+    }
+  ]
