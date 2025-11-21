@@ -29,7 +29,7 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "",
+        "description": "Retrieve all music logs",
         "produces": [
           "application/json"
         ],
@@ -49,29 +49,16 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "",
+        "description": "Create a new music log",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required":"true",
             "schema": {
-              "type": "object",
-              "properties": {
-                "instrument": {
-                  "example": "Drums"
-                },
-                "duration": {
-                  "example": 24
-                },
-                "focusArea": {
-                  "example": "Rudiments"
-                },
-                "date": {
-                  "example": "any"
-                }
-              }
-            }
+              "$ref": "#/definitions/MusicLog"
           }
+        }
         ],
         "responses": {
           "204": {
@@ -91,7 +78,7 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "",
+        "description": "Retrieve a specific music log",
         "produces": [
           "application/json"
         ],
@@ -122,7 +109,7 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "",
+        "description": "Update a music log session",
         "parameters": [
           {
             "name": "id",
@@ -133,22 +120,9 @@
           {
             "name": "body",
             "in": "body",
+            "required":"true",
             "schema": {
-              "type": "object",
-              "properties": {
-                "instrument": {
-                  "example": "Drums"
-                },
-                "duration": {
-                  "example": 24
-                },
-                "focusArea": {
-                  "example": "Rudiments"
-                },
-                "date": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/MusicLog"
             }
           }
         ],
@@ -171,7 +145,7 @@
         "tags": [
           "musicLogs"
         ],
-        "description": "",
+        "description": "Delete a music log session",
         "parameters": [
           {
             "name": "id",
@@ -198,7 +172,7 @@
         "tags": [
           "musicians"
         ],
-        "description": "",
+        "description": "Retrieve all musician records",
         "produces": [
           "application/json"
         ],
@@ -218,30 +192,14 @@
         "tags": [
           "musicians"
         ],
-        "description": "",
+        "description": "Create new musician record",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required":"true",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "Andy Harrisom"
-                },
-                "email": {
-                  "example": "andy@gmail.com"
-                },
-                "age": {
-                  "example": 33
-                },
-                "instrument": {
-                  "example": "Drums"
-                },
-                "experienceLevel": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Musician"
             }
           }
         ],
@@ -263,7 +221,7 @@
         "tags": [
           "musicians"
         ],
-        "description": "",
+        "description": "Retrieve music by id",
         "produces": [
           "application/json"
         ],
@@ -294,7 +252,7 @@
         "tags": [
           "musicians"
         ],
-        "description": "",
+        "description": "Update musician record",
         "parameters": [
           {
             "name": "id",
@@ -305,25 +263,9 @@
           {
             "name": "body",
             "in": "body",
+            "required":"true",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "Andy Harrison"
-                },
-                "email": {
-                  "example": "andy@gmail.com"
-                },
-                "age": {
-                  "example": 33
-                },
-                "instrument": {
-                  "example": "Drums"
-                },
-                "experienceLevel": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Musician"
             }
           }
         ],
@@ -346,7 +288,7 @@
         "tags": [
           "musicians"
         ],
-        "description": "",
+        "description": "Delete a musician by their id",
         "parameters": [
           {
             "name": "id",
@@ -365,6 +307,65 @@
           "500": {
             "description": "Internal Server Error"
           }
+        }
+      }
+    }
+  }, 
+    "definitions": {
+    "MusicLog": {
+      "type": "object",
+      "required": ["instrument", "duration", "focusArea"],
+      "properties": {
+        "instrument": {
+          "type": "string",
+          "description": "The instrument practiced",
+          "example": "Drums"
+        },
+        "duration": {
+          "type": "integer",
+          "description": "Practice duration in minutes",
+          "example": 30
+        },
+        "focusArea": {
+          "type": "string",
+          "description": "What the musician focused on during practice",
+          "example": "Rudiments"
+        },
+        "date": {
+          "type": "string",
+          "example": "any"
+        }
+      }
+    },
+    "Musician": {
+      "type": "object",
+      "required": ["name", "email", "age", "instrument"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the musician",
+          "example": "Andy Harrison"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address of the musician",
+          "example": "andy@gmail.com"
+        },
+        "age": {
+          "type": "integer",
+          "description": "Age of the musician",
+          "example": 33
+        },
+        "instrument": {
+          "type": "string",
+          "description": "Primary instrument played",
+          "example": "Drums"
+        },
+        "experienceLevel": {
+          "type": "string",
+          "description": "Skill level of the musician",
+          "example": "any"
         }
       }
     }
