@@ -7,8 +7,14 @@ const passport = require("passport");
 const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const cors = require("cors");
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 const port = process.env.PORT || 3000;
+
+const store = new MongoDBStore({
+  uri: process.env.MONGODB_URI,
+  collection: "sessions"
+});
 
 app
     .use(bodyParser.json())
@@ -16,6 +22,7 @@ app
         secret: 'secretCode',
         resave: false,
         saveUninitialized: true,
+        store: store
     }))
     // this is a basic express session
     .use(passport.initialize())
