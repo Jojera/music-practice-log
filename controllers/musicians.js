@@ -43,18 +43,23 @@ const getMusicianById = async (req, res) => {
 
 const createMusician = async (req, res) => {
   // #swagger.tags = ['musicians']
-  const musician = {
-      name: req.body.name,
-      email: req.body.email,
-      age: req.body.age,
-      instrument: req.body.instrument,
-      experienceLevel: req.body.experienceLevel,
-  };
-  const response = await mongodb.getDb().db().collection('musicians').insertOne(musician);
-  if (response.acknowledged) {
-      res.status(204).send();
-  } else {
-      res.status(500).json(response.error || 'Some error occurred while creating the musician record.');
+  try { 
+    const musician = {
+        name: req.body.name,
+        email: req.body.email,
+        age: req.body.age,
+        instrument: req.body.instrument,
+        experienceLevel: req.body.experienceLevel,
+    };
+    const response = await mongodb.getDb().db().collection('musicians').insertOne(musician);
+    if (response.acknowledged) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error occurred while creating the musician record.');
+    }
+  } catch (err) {
+    console.error('Error creating musician:', err);
+    res.status(500).json({ message: 'Failed to create musician' });
   }
 };
 
@@ -64,18 +69,23 @@ const updateMusician = async (req, res) => {
     res.status(400).json('Must use a valid musician id to update a musician record.');
   }
   const musicianId = new ObjectId(req.params.id);
-  const musician = {
-    name: req.body.name,
-    email: req.body.email,
-    age: req.body.age,
-    instrument: req.body.instrument,
-    experienceLevel: req.body.experienceLevel,
-  };
-  const response = await mongodb.getDb().db().collection('musicians').replaceOne({_id: musicianId}, musician);
-  if (response.modifiedCount > 0) {
-      res.status(204).send();
-  } else {
-      res.status(500).json(response.error || 'Some error occurred while updating the musician record.');
+  try {
+    const musician = {
+      name: req.body.name,
+      email: req.body.email,
+      age: req.body.age,
+      instrument: req.body.instrument,
+      experienceLevel: req.body.experienceLevel,
+    };
+    const response = await mongodb.getDb().db().collection('musicians').replaceOne({_id: musicianId}, musician);
+    if (response.modifiedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error occurred while updating the musician record.');
+    }
+  } catch (err) {
+    console.error('Error updating musician:', err);
+    res.status(500).json({ message: 'Failed to update musician' });
   }
 };
 
@@ -85,11 +95,16 @@ const deleteMusician = async (req, res) => {
     res.status(400).json('Must use a valid musician id to delete a musician record.');
   }
   const musicianId = new ObjectId(req.params.id);
-  const response = await mongodb.getDb().db().collection('musicians').deleteOne({_id: musicianId});
-  if (response.deletedCount > 0) {
-      res.status(204).send();
-  } else {
-      res.status(500).json(response.error || 'Some error occurred while deleting the musician.');
+  try {
+    const response = await mongodb.getDb().db().collection('musicians').deleteOne({_id: musicianId});
+    if (response.deletedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error occurred while deleting the musician.');
+    }
+  } catch (err) {
+    console.error('Error deleting musician:', err);
+    res.status(500).json({ message: 'Failed to delete musician' });
   }
 };
 
